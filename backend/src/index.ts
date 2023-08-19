@@ -20,7 +20,7 @@ const statusMapping = {
   atendido: 2,
 };
 
-app.get("/attendment", async (req: Request, res: Response) => {
+app.get("/attendments", async (req: Request, res: Response) => {
   const allattendments = await attendmentModel.findAll();
   res.json(allattendments);
 });
