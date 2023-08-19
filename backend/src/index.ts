@@ -25,21 +25,20 @@ app.get("/attendments", async (req: Request, res: Response) => {
   res.json(allattendments);
 });
 
-app.get("/getPendingAttendments/", async (req: Request, res: Response) => {
-  const { status } = req.body;
+app.get("/pending-attendments", async (req: Request, res: Response) => {
   const attendmentByStatus = await attendmentModel.getPendingAttendments();
   res.json(attendmentByStatus);
 });
 
-app.get("/attendment/:team_id", async (req: Request, res: Response) => {
+app.get("/team/:teamId/attendments", async (req: Request, res: Response) => {
   const { team_id } = req.body;
   const attendmentByTeam = await attendmentModel.findByTeam(team_id);
   res.json(attendmentByTeam);
 });
 
 app.post("/attendment", async (req: Request, res: Response) => {
-  const { name, description, active } = req.body;
-  const createAttendment = await attendmentModel.create(name, description, active);
+  const { description, team_id } = req.body;
+  const createAttendment = await attendmentModel.create(description, team_id);
   res.json(createAttendment);
 });
 

@@ -1,17 +1,17 @@
-import { PrismaClient } from '@prisma/client';
-import uuidv4 from "uuid";
+import { Attendment, PrismaClient } from '@prisma/client';
+import { v4 as uuidv4 } from 'uuid';
 
 const prisma = new PrismaClient();
 
 export class AttendmentModel {
-  create(subject: string, description: string, team_id: string) {
+  create(description: string, team_id: string) {
     return prisma.attendment.create({
       data: {
-        id: uuidv4.v1(),
-        subject,
+        id: uuidv4(),
         description,
         team_id,
-        status: 0
+        status: 0,
+        created_at: new Date()
       }
     });
   }
@@ -27,25 +27,41 @@ export class AttendmentModel {
     });
   }
 
-  async findAll() {
-    return await prisma.attendment.findMany({});
+  async getPendingAttendments() {
+    const teams = await prisma.team.findMany();
+    const pendingAttendmentsPerTeam: Attendment[][] = [];
+
+    for (const team of teams) {
+      const pendingAttendments = await prisma.attendment.findMany({
+        where: {
+          status: 0,
+          team_id: team.id
+        },
+        skip: 3,
+        orderBy: {
+          created_at: 'asc'
+        }
+      });
+
+      pendingAttendmentsPerTeam.push(pendingAttendments);
+    }
+    return pendingAttendmentsPerTeam.flat();
   }
 
-  async getPendingAttendments() {
-    return await prisma.attendment.findMany({
-      where: {
-        status: 0
-      },
-      skip: 3
-    });
+  async findAll() {
+    return await prisma.attendment.findMany({});
   }
 
   async findByTeam(team_id: string) {
     return await prisma.attendment.findMany({
       where: {
-        team_id
+        team_id,
+        status: 0,
       },
-      take: 3 // RN limite de 3 por time
+      take: 3,
+      orderBy: {
+        created_at: 'asc'
+      }
     });
   }
 }

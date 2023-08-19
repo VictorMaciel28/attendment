@@ -1,69 +1,47 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import { v4 as uuidv4 } from 'uuid';
 
 async function main() {
   await prisma.attendment.deleteMany({});
 
-  await prisma.attendment.upsert({
-    where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0101" },
-    update: {},
-    create: {
-      id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0101",
-      name: "Treino",
-      description: "Treinar boxe amanhã de tarde",
-      active: true,
+  const teams = [
+    {
+      name: "Cartões",
     },
-  });
-  await prisma.attendment.upsert({
-    where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0120" },
-    update: {},
-    create: {
-      id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0120",
-      name: "Compras",
-      description: "Comprar alimentos para o almoço e janta de sábado",
-      active: true,
+    {
+      name: "Empréstimos",
     },
-  });
-  await prisma.attendment.upsert({
-    where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0112" },
-    update: {},
-    create: {
-      id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0112",
-      name: "Futebol",
-      description: "Futebol ao domingo com os rapazes",
-      active: true,
+    {
+      name: "Outros Assuntos",
     },
-  });
-  await prisma.attendment.upsert({
-    where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0990" },
-    update: {},
-    create: {
-      id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0990",
-      name: "Super mercado na quinta",
-      description: "Comprar produtos de limpeza",
-      active: true,
-    },
-  });
-  await prisma.attendment.upsert({
-    where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0991" },
-    update: {},
-    create: {
-      id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0991",
-      name: "Estudar",
-      description: "Praticar Javascript com todo app",
-      active: false,
-    },
-  });
-  await prisma.attendment.upsert({
-    where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0992" },
-    update: {},
-    create: {
-      id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0992",
-      name: "Preparar para viagem",
-      description: "Praticar Javascript com todo app",
-      active: false,
-    },
-  });
+  ];
+
+  for (const team of teams) {
+    const teamId = uuidv4();
+    const createdTeam = await prisma.team.upsert({
+      where: { id: teamId },
+      update: {},
+      create: {
+        id: teamId,
+        name: team.name,
+      },
+    });
+
+    for (let i = 1; i <= 5; i++) {
+      const attendmentId = uuidv4(); // Generate a new UUID for each Attendment
+      await prisma.attendment.create({
+        data: {
+          id: attendmentId,
+          status: 0,
+          team_id: createdTeam.id,
+          description: `Descricao seed para ${createdTeam.name} - ${i}`,
+          created_at: new Date()
+        },
+      });
+    }
+  }
+  
 }
 
 main()
