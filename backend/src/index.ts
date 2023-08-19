@@ -1,10 +1,10 @@
 import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import cors from 'cors';
-import { TasksModel } from "./models/TasksModel";
+import { AttendmentModel } from "./models/AttendmentModel";
 const app = express();
 const prisma = new PrismaClient();
-const tasksModel = new TasksModel();
+const attendmentModel = new AttendmentModel();
 
 app.use(express.json());
 
@@ -14,39 +14,40 @@ const options: cors.CorsOptions = {
 };
 app.use(cors(options));
 
-app.get("/tasks", async (req: Request, res: Response) => {
-  const alltasks = await tasksModel.findAll();
-  res.json(alltasks);
+const statusMapping = {
+  aberto: 0,
+  atendendo: 1,
+  atendido: 2,
+};
+
+app.get("/attendment", async (req: Request, res: Response) => {
+  const allattendments = await attendmentModel.findAll();
+  res.json(allattendments);
 });
 
-app.get("/tasks/completed", async (req: Request, res: Response) => {
-  const alltasks = await tasksModel.findAllCompleted();
-  res.json(alltasks);
+app.get("/getPendingAttendments/", async (req: Request, res: Response) => {
+  const { status } = req.body;
+  const attendmentByStatus = await attendmentModel.getPendingAttendments();
+  res.json(attendmentByStatus);
 });
 
-app.post("/tasks", async (req: Request, res: Response) => {
+app.get("/attendment/:team_id", async (req: Request, res: Response) => {
+  const { team_id } = req.body;
+  const attendmentByTeam = await attendmentModel.findByTeam(team_id);
+  res.json(attendmentByTeam);
+});
+
+app.post("/attendment", async (req: Request, res: Response) => {
   const { name, description, active } = req.body;
-  const newtask = await tasksModel.create(name, description, active);
-  res.json(newtask);
+  const createAttendment = await attendmentModel.create(name, description, active);
+  res.json(createAttendment);
 });
 
-app.put("/tasks", async (req: Request, res: Response) => {
-  const { id, name, description } = req.body;
-  const editedTask = await tasksModel.edit(id, name, description);
-  res.json(editedTask);
-});
-
-app.delete("/task/:id", async (req: Request, res: Response) => {
+app.put("/attendment/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
-  const deletedTask = await tasksModel.remove(id);
-  res.json(deletedTask);
-});
-
-app.put("/task/:id", async (req: Request, res: Response) => {
-  const id = req.params.id;
-  const active = req.body.active;
-  const updatedTask = await tasksModel.update(id, !active);
-  res.json(updatedTask);
+  const status = req.body.status;
+  const updateAttendment = await attendmentModel.update(id, status);
+  res.json(updateAttendment);
 });
 
 app.get("/", async (req: Request, res: Response) => {

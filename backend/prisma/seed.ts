@@ -2,9 +2,9 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.tasks.deleteMany({});
+  await prisma.attendment.deleteMany({});
 
-  await prisma.tasks.upsert({
+  await prisma.attendment.upsert({
     where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0101" },
     update: {},
     create: {
@@ -14,7 +14,7 @@ async function main() {
       active: true,
     },
   });
-  await prisma.tasks.upsert({
+  await prisma.attendment.upsert({
     where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0120" },
     update: {},
     create: {
@@ -24,7 +24,7 @@ async function main() {
       active: true,
     },
   });
-  await prisma.tasks.upsert({
+  await prisma.attendment.upsert({
     where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0112" },
     update: {},
     create: {
@@ -34,7 +34,7 @@ async function main() {
       active: true,
     },
   });
-  await prisma.tasks.upsert({
+  await prisma.attendment.upsert({
     where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0990" },
     update: {},
     create: {
@@ -44,7 +44,7 @@ async function main() {
       active: true,
     },
   });
-  await prisma.tasks.upsert({
+  await prisma.attendment.upsert({
     where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0991" },
     update: {},
     create: {
@@ -54,7 +54,7 @@ async function main() {
       active: false,
     },
   });
-  await prisma.tasks.upsert({
+  await prisma.attendment.upsert({
     where: { id: "28ea2c60-ca07-11ec-ae41-6dd5f2d0992" },
     update: {},
     create: {

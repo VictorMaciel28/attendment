@@ -10,9 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Tasks {
-  id String @unique
-  name String 
+model Attendment {
+  id          String  @id
+  subject     String
   description String
-  active Boolean
+  status      Int
+  team_id     String? @unique
+  team        Team?   @relation(fields: [team_id], references: [id])
+}
+
+model Team {
+  id         String      @id
+  name       String
+  attendment Attendment?
 }
