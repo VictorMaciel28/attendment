@@ -2,9 +2,11 @@ import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import cors from 'cors';
 import { AttendmentModel } from "./models/AttendmentModel";
+import { TeamModel } from "./models/TeamModel";
 const app = express();
 const prisma = new PrismaClient();
 const attendmentModel = new AttendmentModel();
+const teamModel = new TeamModel();
 
 app.use(express.json());
 
@@ -47,6 +49,11 @@ app.put("/attendment/:id", async (req: Request, res: Response) => {
   const status = req.body.status;
   const updateAttendment = await attendmentModel.update(id, status);
   res.json(updateAttendment);
+});
+
+app.get("/teams", async (req: Request, res: Response) => {
+  const teams = await teamModel.getTeams();
+  res.json(teams);
 });
 
 app.get("/", async (req: Request, res: Response) => {

@@ -29,7 +29,7 @@ async function main() {
     });
 
     for (let i = 1; i <= 5; i++) {
-      const attendmentId = uuidv4(); // Generate a new UUID for each Attendment
+      const attendmentId = uuidv4();
       await prisma.attendment.create({
         data: {
           id: attendmentId,
