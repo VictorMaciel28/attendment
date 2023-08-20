@@ -58,6 +58,22 @@ $ ng serve
 
 ```
 
+#### Erros na compilação
+
+```shell
+
+Pode ser necessário o uso do comando
+
+Para windows:
+set NODE_OPTIONS=--openssl-legacy-provider
+
+Para Linux:
+$ env:NODE_OPTIONS = "--openssl-legacy-provider"
+
+Isso se dá por ajustes de SSL realizado nas versões mais recentes
+
+```
+
 #### Algumas Imagens:
 
 <img src="screenshots/main_page.png">

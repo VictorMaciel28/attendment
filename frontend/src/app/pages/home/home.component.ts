@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home-component',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  title = 'frontend';
+  constructor(private router: Router) {}
+  title = 'Home';
+
+  navigateToTeamAtendimentos(team_id: String){
+    console.log(team_id);
+    
+    this.router.navigate(['/attendments/team', team_id]);
+  }
 }
+
+

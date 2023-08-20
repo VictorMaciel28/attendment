@@ -77,9 +77,33 @@
     transition: background-color
   }
 
+  .paragraph-card {
+    display: flex;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 16px;
+    box-sizing: border-box;
+    align-items: center;
+  }
+  
+  .paragraph {
+    flex: 4;
+    margin: 0;
+  }
+  
   .centered-card:hover {
     background-color: #1976d2;
     color:white;
+  }
+
+  .custom-list-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .content {
+    flex: 8;
+    padding: 10px;
   }
   
   .options{

@@ -1,38 +1,27 @@
 <div class="toolbar" role="banner"></div>
 
-
 <div class="content" role="main">
-  <h2 class="home-title">Times de atendimento</h2>
+  <h2 class="home-title">Solicitações</h2>
+
   
-  <mat-card (click)="navigateToTeamAtendimentos('1fbd231b-ee19-4680-8f74-9c7c580d7d58')" class="centered-card">
-    <mat-card-content><span class="options">Cartões</span></mat-card-content>
+  <mat-card class="paragraph-card" *ngFor="let attendment of attendmentList">
+    <p class="paragraph">{{ attendment.description }}</p>
+    <button mat-button (click)="changeAttendmentStatus(attendment.id)" color="primary">Concluir atendimento <mat-icon>check_circle</mat-icon></button>
   </mat-card>
-  <mat-card class="centered-card">
-    <mat-card-content><span class="options">Empréstimos</span></mat-card-content>
-  </mat-card>
-  <mat-card class="centered-card">
-    <mat-card-content><span class="options">Outros assuntos</span></mat-card-content>
-  </mat-card>
+  <a routerLink="/"> < Voltar</a>&nbsp;
 
-  <mat-card class="centered-card">
-    <mat-card-content><span class="options">Nova solicitação</span></mat-card-content>
-  </mat-card>
-
-
-  <!--<h2>Lista de Tarefas</h2>
-  <list-todo style="width: 100%"></list-todo>-->
 
   <footer>
     Link do&nbsp;
     <a
-      href="https://github.com/VictorMaciel28/todo-list"
+      href="https://github.com/VictorMaciel28/attendment"
       target="_blank"
       rel="noopener"
     >
       Repositório
     </a>
     <a
-      href="https://github.com/VictorMaciel28/todo-list"
+      href="https://github.com/VictorMaciel28/attendment"
       target="_blank"
       rel="noopener"
     >
