@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 import { v4 as uuidv4 } from 'uuid';
 
 async function main() {
+  await prisma.team.deleteMany({});
   await prisma.attendment.deleteMany({});
 
   const teams = [
