@@ -1,4 +1,4 @@
-# CRUD- Todo Node & Angular
+# Sistema de controle de solicitações
 
 ###  Instalação: 
 
@@ -17,7 +17,7 @@ git clone https://github.com/VictorMaciel28/attendment.git
 
 Arquivo .env em /backend com a variável:
 
-DATABASE_URL="mysql://user:password@endereco:porta/ubots?schema=public"
+DATABASE_URL="mysql://user:password@endereco:porta/banco?schema=public"
 
 
 ```
@@ -68,7 +68,7 @@ Para windows:
 set NODE_OPTIONS=--openssl-legacy-provider
 
 Para Linux:
-$ env:NODE_OPTIONS = "--openssl-legacy-provider"
+$ $env:NODE_OPTIONS = "--openssl-legacy-provider"
 
 Isso se dá por ajustes de SSL realizado nas versões mais recentes
 
@@ -76,8 +76,12 @@ Isso se dá por ajustes de SSL realizado nas versões mais recentes
 
 #### Algumas Imagens:
 
-<img src="screenshots/main_page.png">
+<img src="screenshots/home">
 
 <br/>
 
-<img src="screenshots/edit_func.png">
+<img src="screenshots/attendments.png">
+
+<br/>
+
+<img src="screenshots/add_attendments.png">
