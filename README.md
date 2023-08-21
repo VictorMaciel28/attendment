@@ -76,7 +76,7 @@ Isso se dá por ajustes de SSL realizado nas versões mais recentes
 
 #### Algumas Imagens:
 
-<img src="screenshots/home">
+<img src="screenshots/home.png">
 
 <br/>
 
