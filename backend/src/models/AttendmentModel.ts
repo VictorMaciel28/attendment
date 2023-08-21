@@ -29,7 +29,7 @@ export class AttendmentModel {
 
   async getPendingAttendments() {
     const teams = await prisma.team.findMany();
-    const pendingAttendmentsPerTeam: Attendment[][] = [];
+    const allPendingAttendments: Attendment[] = [];
 
     for (const team of teams) {
       const pendingAttendments = await prisma.attendment.findMany({
@@ -37,22 +37,26 @@ export class AttendmentModel {
           status: 0,
           team_id: team.id
         },
-        skip: 3,
         orderBy: {
           created_at: 'asc'
-        }
+        },
+        skip: 3
       });
-
-      pendingAttendmentsPerTeam.push(pendingAttendments);
+      allPendingAttendments.push(...pendingAttendments);
     }
-    return pendingAttendmentsPerTeam.flat();
+
+    const sortedPendingAttendments = allPendingAttendments.sort(
+      (a, b) => a.created_at.getTime() - b.created_at.getTime()
+    );
+
+  return sortedPendingAttendments;
   }
 
   async findAll() {
     return await prisma.attendment.findMany({});
   }
 
-  async findByTeam(team_id: string) {
+  async findByTeam(team_id: string) {    
     return await prisma.attendment.findMany({
       where: {
         team_id,

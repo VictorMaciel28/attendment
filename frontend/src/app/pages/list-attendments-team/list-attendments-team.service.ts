@@ -1,26 +1,27 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Team } from './list-attendments-team.interface';
-import { Attendment } from './list-attendments-team.interface';
+import { Attendment } from '../attendments.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AttendmentsTeamsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   URL = environment.apiURL;
-  
 
-  getAttendmentsTeam(team_id: String) {
+
+  getAttendmentsTeam(team_id: string) {
     const url = `${this.URL}/team/${team_id}/attendments`;
     return this.http.get<Attendment[]>(url, {});
   }
 
-  /*getTeams() {
-    return this.http.get<Team[]>(this.URL + '/teams');
-  }*/
+  changeAttendmentStatus(attendment_id: string, status: number) {
+    return this.http.put<Task[]>(this.URL + `/attendment/${attendment_id}`, {
+      status
+    });
+  }
 
   /*getListCompleted() {
     return this.http.get<Task[]>(this.URL + '/tasks/completed');

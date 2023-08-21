@@ -1,0 +1,54 @@
+.content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-title{
+    margin-top:2%;
+    margin-bottom:2%;
+}
+
+.paragraph-card {
+    display: flex;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 16px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+
+a:hover {
+    color: #125699;
+}
+
+hr{
+    width: 100%;
+    opacity: 30%;
+}
+
+.success-text {
+    color: green;
+  }
+  
+  .error-text {
+    color: red;
+  }
+
+
+
+  

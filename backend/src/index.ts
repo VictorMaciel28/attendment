@@ -33,7 +33,7 @@ app.get("/pending-attendments", async (req: Request, res: Response) => {
 });
 
 app.get("/team/:teamId/attendments", async (req: Request, res: Response) => {
-  const { team_id } = req.body;
+  const team_id = req.params.teamId;
   const attendmentByTeam = await attendmentModel.findByTeam(team_id);
   res.json(attendmentByTeam);
 });

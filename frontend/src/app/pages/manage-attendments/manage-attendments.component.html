@@ -1,0 +1,34 @@
+<app-header></app-header>
+
+<div class="content" role="main">
+    <h2 class="home-title">Nova solicitação</h2>
+
+    <form #submitAttendmentForm="ngForm" class="full-width">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Solicitação</mat-label>
+            <input name="nameSubmitInput" [(ngModel)]="attendmentInputValue" matInput />
+        </mat-form-field>
+        <br />
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Assunto </mat-label>
+            <mat-select name="nameSubmitSubject" [(ngModel)]="selectedSubject">
+                <mat-option *ngFor="let team of teams"
+                    value="{{team.id}}">{{team.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button (click)="submitAttendment()" mat-raised-button color="primary">
+            Enviar solicitação
+        </button>
+    </form>
+    <p [ngClass]="resultMessageColor">{{resultMessage}}</p>
+    <hr>
+    <h2 class="home-title">Solicitações na fila</h2>
+    <mat-card class="paragraph-card" *ngFor="let attendment of attendmentList">
+        <p class="paragraph">{{ attendment.description }}</p>
+    </mat-card>
+    <a routerLink="/">
+        < Voltar</a>
+
+</div>
+
+<app-footer></app-footer>

@@ -11,18 +11,29 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule } from '@angular/material/grid-list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
-import { ListTodoComponent } from './pages/list-todo/list.todo.component';
 import { ListAttendmentsTeamComponent } from './pages/list-attendments-team/list-attendments-team.component';
+import { ManageAttendmentsComponent } from './pages/manage-attendments/manage-attendments.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ListTodoComponent,
     ListAttendmentsTeamComponent,
+    ManageAttendmentsComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +47,10 @@ import { ListAttendmentsTeamComponent } from './pages/list-attendments-team/list
     MatInputModule,
     MatCardModule,
     MatGridListModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
