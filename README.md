@@ -68,7 +68,7 @@ Para windows:
 set NODE_OPTIONS=--openssl-legacy-provider
 
 Para Linux:
-$ env:NODE_OPTIONS = "--openssl-legacy-provider"
+$ $env:NODE_OPTIONS = "--openssl-legacy-provider"
 
 Isso se dá por ajustes de SSL realizado nas versões mais recentes
 
